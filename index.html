@@ -5,10 +5,11 @@
     <title>Les Petits Plats</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <!-- FONT ANTON -->
+    <!-- FONTS FAMILY -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- FEUILLES DE STYLE -->
     <!-- Bootstrap 5 -->
@@ -35,7 +36,42 @@
       </div> 
     </header>
     
-    <main>
+    <main class="container mt-4">
+      <div class="row d-flex flex-row justify-content-between pb-3">
+        <div class="filters_container col">
+          <select class="col-2">
+            <option>ingrédient</option>
+          </select>
+          <select class="col-2 offset-1">
+            <option>Appareils</option>
+          </select>
+          <select class="col-2 offset-1">
+            <option>Ustensiles</option>
+          </select>
+        </div>
+        <div class="col-3 text-end">
+          <span class="total_recipes">??? recettes</span>
+        </div>
+      </div>
+      <!-- <div class="row pb-3">
+        <div class="options_selected_container col-9">
+          <select class="col-2">
+            <option>Crème de coco</option>
+          </select>
+          <select class="col-2 offset-1">
+            <option>Crème de coco</option>
+          </select>
+          <select class="col-2 offset-1">
+            <option>Crème de coco</option>
+          </select>
+        </div>        
+      </div> -->
+      <div class="row recipes_container mt-4 d-flex flex-row gap-5">
+        <article class="bg-primary col">Carapuce</article>
+        <article class="bg-danger col">Salamèche</article>
+        <article class="bg-success col">Bulbizar</article>
+      </div>
+
     </main>
 
     <footer></footer> 

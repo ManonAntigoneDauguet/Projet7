@@ -1,11 +1,14 @@
 :root {
     --primary-color: #FFD15B;
+    --primary-family-font: 'Anton', sans-serif;
+    --secondary-family-font: 'Manrope', sans-serif;
 }
 
 body {
     margin: 0 auto;
     padding: 0;
     max-width: 1440px;
+    font-family: var(--secondary-family-font);
 }
 
 /******************* HEADER ***********************/
@@ -34,7 +37,7 @@ header .logo {
 }
 
 .main_tagline {
-    font-family: 'Anton', sans-serif;
+    font-family: var(--primary-family-font);
     color: var(--primary-color);
     font-size: 44px;
     text-align: center;
@@ -60,4 +63,10 @@ nav img:hover {
 nav img:active {
     opacity: 0.6;
     transform: scale(0.9);
+}
+
+/******************* MAIN ***********************/
+.total_recipes {
+    font-family: var(--primary-family-font);
+    font-size: 21px;
 }
