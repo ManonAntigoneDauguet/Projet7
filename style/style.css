@@ -1,4 +1,63 @@
+:root {
+    --primary-color: #FFD15B;
+}
+
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    max-width: 1440px;
+}
+
+/******************* HEADER ***********************/
+header {
+    height: 667px;
+    box-sizing: border-box;
+    background-image: url("../images/main.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header::before {
+    content: "";
+    margin-top: 100px;
+}
+
+header .logo {
+    position: absolute;
+    top: 51px;
+    left: 69px;
+    width: 207px;
+}
+
+.main_tagline {
+    font-family: 'Anton', sans-serif;
+    color: var(--primary-color);
+    font-size: 44px;
+    text-align: center;
+}
+
+nav input[type="text"] {
+    height: 72px;
+    border-radius: 11px;
+    padding: 30px;
+    transform: scale(1);
+}
+
+nav img {
+    position: relative;
+    right: 12.6%;
+    bottom: 62px;
+}
+
+nav img:hover {
+    opacity: 0.6;
+}
+
+nav img:active {
+    opacity: 0.6;
+    transform: scale(0.9);
 }
