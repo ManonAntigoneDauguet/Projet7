@@ -36,42 +36,81 @@
       </div> 
     </header>
     
-    <main class="container mt-4">
-      <div class="row d-flex flex-row justify-content-between pb-3">
-        <div class="filters_container col">
-          <select class="col-2">
-            <option>ingrédient</option>
-          </select>
-          <select class="col-2 offset-1">
-            <option>Appareils</option>
-          </select>
-          <select class="col-2 offset-1">
-            <option>Ustensiles</option>
-          </select>
+    <main class="bg-light">
+      <div class="container">
+        <div class="row d-flex flex-row-reverse justify-content-between pb-4 pt-4">
+          <div class="col-3 text-end">
+            <span class="total_recipes">??? recettes</span>
+          </div>    
+          <div class="filters_container col">
+            <select class="col-2">
+              <option>Ingrédient</option>
+            </select>
+            <select class="col-2 offset-1">
+              <option>Appareils</option>
+            </select>
+            <select class="col-2 offset-1">
+              <option>Ustensiles</option>
+            </select>
+          </div>
         </div>
-        <div class="col-3 text-end">
-          <span class="total_recipes">??? recettes</span>
-        </div>
-      </div>
-      <!-- <div class="row pb-3">
-        <div class="options_selected_container col-9">
-          <select class="col-2">
-            <option>Crème de coco</option>
-          </select>
-          <select class="col-2 offset-1">
-            <option>Crème de coco</option>
-          </select>
-          <select class="col-2 offset-1">
-            <option>Crème de coco</option>
-          </select>
-        </div>        
-      </div> -->
-      <div class="row recipes_container mt-4 d-flex flex-row gap-5">
-        <article class="bg-primary col">Carapuce</article>
-        <article class="bg-danger col">Salamèche</article>
-        <article class="bg-success col">Bulbizar</article>
-      </div>
+        <!-- <div class="row pb-3">
+          <div class="options_selected_container col-9">
+            <select class="col-2">
+              <option>Crème de coco</option>
+            </select>
+            <select class="col-2 offset-1">
+              <option>Crème de coco</option>
+            </select>
+            <select class="col-2 offset-1">
+              <option>Crème de coco</option>
+            </select>
+          </div>        
+        </div> -->
+        
+        <div class="recipes_container mt-4 d-flex flex-row flex-wrap justify-content-between gap-5">
 
+          <div class="card_container">
+            <div class="card">
+              <img src="./images/photos_recettes/Recette01.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <div class="recipe-time">10min</div>
+                <h5 class="card-title mb-0">Limonade de Coco</h5>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Recette</h6>
+                  <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble. MIxer jusqu'à obtenir la circonstance désirée.</p>                  
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Ingrédients</h6>
+                  <div class="card-text d-flex flex-row flex-wrap">
+                    <div class="col-6">
+                      <p class="ingredient m-0">Lait de coco</p>
+                      <p class="text-muted">400ml</p>
+                    </div>
+                    <div class="col-6">
+                      <p class="ingredient m-0">Jus de citron</p>
+                      <p class="text-muted">2</p>
+                    </div>
+                    <div class="col-6">
+                      <p class="ingredient m-0">Crème de coco</p>
+                      <p class="text-muted">4 cuillères</p>
+                    </div>
+                    <div class="col-6">
+                      <p class="ingredient m-0">Sucre</p>
+                      <p class="text-muted">20g</p>
+                    </div>
+                    <div class="col-6">
+                      <p class="ingredient m-0">Glaçons</p>
+                      <p class="text-muted">2</p>
+                    </div>                     
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+            
+        </div>
+    </div>
     </main>
 
     <footer></footer> 
