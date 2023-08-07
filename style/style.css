@@ -79,6 +79,7 @@ main .container {
     font-size: 21px;
 }
 
+
 /******************* CARDS ***********************/
 .card {
     width: 380px;
@@ -110,36 +111,36 @@ main .container {
     }
 }
 
-.card-img-top {
+.card .card-img-top {
     height: 253px;
     object-fit: cover;
     border-top-left-radius: 21px;
     border-top-right-radius: 21px;
 }
 
-.card-title {
+.card .card-title {
     font-family: var(--primary-family-font);
     font-size: 18px;
 }
 
-.card-subtitle {
+.card .card-subtitle {
     font-size: 12px;
     letter-spacing: 1.5px;
     font-weight: 700;
 }
 
-.card-body {
+.card .card-body {
     display: flex;
     flex-direction: column;
     gap: 32px;
     padding: 32px 25px;
 }
 
-.card-text {
+.card .card-text {
     font-size: 14px;
 }
 
-.recipe-time {
+.card .recipe-time {
     position: absolute;
     background-color: var(--primary-color);
     border-radius: 14px;
@@ -152,6 +153,6 @@ main .container {
     text-align: center;
 }
 
-.ingredient {
+.card .ingredient {
     font-weight: 500;
 }

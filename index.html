@@ -38,19 +38,22 @@
     
     <main class="bg-light">
       <div class="container">
-        <div class="row d-flex flex-row-reverse justify-content-between pb-4 pt-4">
-          <div class="col-3 text-end">
+        <div class="row d-flex flex-column flex-sm-row-reverse justify-content-sm-between pb-4 pt-4">
+          <div class="col-12 col-sm-3 text-sm-end">
             <span class="total_recipes">??? recettes</span>
           </div>    
           <div class="filters_container col">
-            <select class="col-2">
-              <option>Ingrédient</option>
+            <select name="ingredients" id="ingredients" class="col-md-2">
+              <option selected>Ingrédients</option>
+              <div class="ingredients-filters_container"></div>
             </select>
-            <select class="col-2 offset-1">
-              <option>Appareils</option>
+            <select name="appareils" id="appareils" class="col-md-2 offset-md-1">
+              <option selected>Appareils</option>
+              <div class="appareils-filters_container"></div>
             </select>
-            <select class="col-2 offset-1">
-              <option>Ustensiles</option>
+            <select name="ustensiles" id="ustensiles" class="col-md-2 offset-md-1">
+              <option selected>Ustensiles</option>
+              <div class="ustensiles-filters_container"></div>
             </select>
           </div>
         </div>
@@ -83,23 +86,103 @@
                 <div>
                   <h6 class="card-subtitle mb-3 text-muted text-uppercase">Ingrédients</h6>
                   <div class="card-text d-flex flex-row flex-wrap">
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                       <p class="ingredient m-0">Lait de coco</p>
                       <p class="text-muted">400ml</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                       <p class="ingredient m-0">Jus de citron</p>
                       <p class="text-muted">2</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                       <p class="ingredient m-0">Crème de coco</p>
                       <p class="text-muted">4 cuillères</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
                       <p class="ingredient m-0">Sucre</p>
                       <p class="text-muted">20g</p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Glaçons</p>
+                      <p class="text-muted">2</p>
+                    </div>                     
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="card_container">
+            <div class="card">
+              <img src="./images/photos_recettes/Recette01.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <div class="recipe-time">10min</div>
+                <h5 class="card-title mb-0">Limonade de Coco</h5>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Recette</h6>
+                  <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble. MIxer jusqu'à obtenir la circonstance désirée.</p>                  
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Ingrédients</h6>
+                  <div class="card-text d-flex flex-row flex-wrap">
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Lait de coco</p>
+                      <p class="text-muted">400ml</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Jus de citron</p>
+                      <p class="text-muted">2</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Crème de coco</p>
+                      <p class="text-muted">4 cuillères</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Sucre</p>
+                      <p class="text-muted">20g</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Glaçons</p>
+                      <p class="text-muted">2</p>
+                    </div>                     
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="card_container">
+            <div class="card">
+              <img src="./images/photos_recettes/Recette01.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <div class="recipe-time">10min</div>
+                <h5 class="card-title mb-0">Limonade de Coco</h5>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Recette</h6>
+                  <p class="card-text">Mettre les glaçons à votre goût dans le blender, Ajouter le lait la crème de coco, le jus de 2 citrons et le sucre ensemble. MIxer jusqu'à obtenir la circonstance désirée.</p>                  
+                </div>
+                <div>
+                  <h6 class="card-subtitle mb-3 text-muted text-uppercase">Ingrédients</h6>
+                  <div class="card-text d-flex flex-row flex-wrap">
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Lait de coco</p>
+                      <p class="text-muted">400ml</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Jus de citron</p>
+                      <p class="text-muted">2</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Crème de coco</p>
+                      <p class="text-muted">4 cuillères</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <p class="ingredient m-0">Sucre</p>
+                      <p class="text-muted">20g</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
                       <p class="ingredient m-0">Glaçons</p>
                       <p class="text-muted">2</p>
                     </div>                     
