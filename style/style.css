@@ -84,6 +84,11 @@ main .container {
 
 
 /******************* FILTRES **********************/
+.filters_container {
+    gap: 5%;
+    row-gap: 24px;
+}
+
 .button {
     border: none;
     height: 56px;
@@ -97,6 +102,7 @@ main .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
 }
 
 .options_selected_container .button:hover {
@@ -106,6 +112,11 @@ main .container {
 
 
 /******************* CARDS ***********************/
+.recipes_container {
+    gap: 0;
+    row-gap: 60px;
+}
+
 .card {
     width: 380px;
     height: 731px;
