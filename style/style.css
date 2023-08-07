@@ -57,6 +57,7 @@ nav img {
 }
 
 nav img:hover {
+    cursor: pointer;
     opacity: 0.6;
 }
 
@@ -77,6 +78,30 @@ main .container {
 .total_recipes {
     font-family: var(--primary-family-font);
     font-size: 21px;
+    position: relative;
+    top: 15px;
+}
+
+
+/******************* FILTRES **********************/
+.button {
+    border: none;
+    height: 56px;
+    width: 195px;
+    border-radius: 11px;
+    box-sizing: border-box;
+    padding: 17px 16px;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.options_selected_container .button:hover {
+    opacity: 0.6;
+    cursor: pointer;
 }
 
 
