@@ -179,6 +179,11 @@ main .container {
     font-size: 14px;
 }
 
+.card .description {
+    height: 80px;
+    overflow: hidden;
+}
+
 .card .recipe-time {
     position: absolute;
     background-color: var(--primary-color);
@@ -194,6 +199,9 @@ main .container {
 
 .card .ingredient {
     font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card:hover {
