@@ -66,6 +66,7 @@ nav img:active {
     transform: scale(0.9);
 }
 
+
 /******************* MAIN ***********************/
 main {
     padding: 0 6%;
@@ -124,6 +125,8 @@ main .container {
     border-radius: 21px;
     border: none;
     position: relative;
+    transform: scale(1);
+    transition: all 300ms ease-in-out;
 }
 
 @media screen and (max-width: 992px) {
@@ -191,4 +194,8 @@ main .container {
 
 .card .ingredient {
     font-weight: 500;
+}
+
+.card:hover {
+    transform: scale(1.01);
 }
