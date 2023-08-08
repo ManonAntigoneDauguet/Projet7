@@ -29,8 +29,12 @@
         </div>
         <nav class="row d-flex justify-content-center align-items-center position-relative mt-2">
           <input type="text" name="search" id="search" class="col-9" placeholder="Rechercher une recette, un ingrédient, ...">
-          <div class="d-flex justify-content-end">
-            <img src="./images/icons/search_icon.svg" alt="lancer la recherche" height="52px">
+          <div class="icon_container d-flex justify-content-end position-relative">
+            <img src="./images/icons/search_icon.svg" alt="lancer la recherche" height="52px" class="search_icon">
+            <img src="./images/icons/active_search_icon.svg" alt="lancer la recherche" height="52px" class="active_search_icon">
+          </div>
+          <div class="close_container text-end d-none d-sm-block col-7 col-lg-8 position-relative">
+            <img src="./images/icons/close_icon.svg" height="13px" alt="supprimer">            
           </div>
         </nav>
       </div> 
@@ -59,12 +63,13 @@
           </div>
         </div>
         <div class="row">
-          <!-- <div class="options_selected_container col-12 d-flex flex-column flex-md-row flex-wrap gap-4 pb-4">
-            <div class="col-md-2 button bg-warning">
+          <div class="options_selected_container col-12 d-flex flex-column flex-md-row flex-wrap gap-4 pb-4">
+            <div class="col-md-2 button bg-warning position-relative">
               <span>Crème de coco</span>
-              <img src="./images/icons/close_icon.svg" height="10px">
+              <img src="./images/icons/close_icon.svg" height="10px" alt="supprimer" class="close_icon">
+              <img src="./images/icons/active_close_icon.svg" height="17px" alt="supprimer" class="active_close_icon">
             </div>
-          </div> -->
+          </div>
         </div>
         
         <div class="recipes_container mt-4 d-flex flex-row flex-wrap justify-content-between">
