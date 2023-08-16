@@ -50,7 +50,13 @@ nav input[type="text"] {
     transform: scale(1);
 }
 
-nav .active_search_icon, nav .search_icon {
+nav .search_button {
+    height: 50px;
+    width: 50px;
+    opacity: 0;
+}
+
+nav .active_search_icon, nav .search_icon, nav .search_button {
     position: absolute;
     right: 13.4%;
     bottom: 10px;
@@ -62,7 +68,7 @@ nav .active_search_icon {
     opacity: 0;
 }
 
-nav .active_search_icon:hover {
+nav .icon_container:hover .active_search_icon {
     opacity: 1;
 }
 
@@ -103,7 +109,12 @@ main .container {
     row-gap: 24px;
 }
 
-.button {
+.options_selected_container {
+    gap: 20px;
+    row-gap: 0px;
+}
+
+.tag {
     border: none;
     height: 56px;
     width: 195px;
@@ -120,7 +131,82 @@ main .container {
     cursor: pointer;
 }
 
-.options_selected_container .button:hover span {
+.filter_options {
+    padding-top: 56px;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    transform: scaleY(0);
+    transition: 500ms ease-in-out;
+    transform-origin: top;
+    background-color: white;
+    width: 195px;
+    max-height: 315px;
+    border-radius: 11px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.filter_options::-webkit-scrollbar {
+    display: none;
+} 
+
+.filter_options .list_options li {
+    cursor: pointer;  
+    border: none;  
+    font-size: 14px;
+    padding-top: 5.2px;
+    padding-bottom: 5.2px;
+    transition: background-color 200ms linear;
+}
+
+.filter_options .list_options li:hover {
+    background-color: var(--primary-color);
+}
+
+/* Fonctionnement des filtres */
+.filter label div {
+    position: absolute;
+    z-index: 3;
+}
+
+.filter_options div {
+    opacity: 0;
+}
+
+.filter-checkbox {
+    position: absolute;
+    top: 17px;
+    right: 16px;
+    appearance: none;
+    z-index: 3;
+}
+
+.filter-checkbox:checked ~ .filter_options {
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    transform: scaleY(1);
+}
+
+.filter-checkbox:checked ~ .filter_options div {
+    transition: opacity .3s 100ms linear;
+    opacity: 1;
+}
+
+.filter-checkbox:checked + label .chevron {
+    transform: rotate(180deg);
+    transition: .1s ease-in-out;
+}
+
+.filter-checkbox:not(:checked) + label .chevron {
+    transition: .2s ease-in-out;
+}
+
+.filter-checkbox:not(:checked) ~ .filter_options div {
+    transition: opacity 200ms linear;
+}
+
+/* Animation des tags survolés */
+.options_selected_container .tag:hover span {
     font-weight: 700;
 }
 
@@ -130,11 +216,11 @@ main .container {
     opacity: 0;
 }
 
-.options_selected_container .button:hover .active_close_icon {
+.options_selected_container .tag:hover .active_close_icon {
     opacity: 1;
 }
 
-.options_selected_container .button:hover .close_icon {
+.options_selected_container .tag:hover .close_icon {
     opacity: 0;
 }
 
@@ -215,7 +301,7 @@ main .container {
     position: absolute;
     background-color: var(--primary-color);
     border-radius: 14px;
-    width: 63px;
+    width: 65px;
     height: 26px;
     padding: 5px 15px;
     top: 21px;
