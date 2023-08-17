@@ -141,15 +141,19 @@ main .container {
     transform-origin: top;
     background-color: white;
     width: 195px;
-    max-height: 315px;
     border-radius: 11px;
-    overflow: scroll;
-    scrollbar-width: none;
 }
 
-.filter_options::-webkit-scrollbar {
+.filter_options .list_options::-webkit-scrollbar {
     display: none;
 } 
+
+.filter_options .list_options {
+    border-radius: 11px;
+    max-height: 208px;
+    overflow: scroll;
+    scrollbar-width: none;    
+}
 
 .filter_options .list_options li {
     cursor: pointer;  
@@ -203,6 +207,15 @@ main .container {
 
 .filter-checkbox:not(:checked) ~ .filter_options div {
     transition: opacity 200ms linear;
+}
+
+@media screen and (max-width: 992px) {
+    .filter-checkbox:checked ~ .filter_options {
+        z-index: 4;
+    } 
+    .filter-checkbox:checked + label div {
+        z-index: 5;
+    } 
 }
 
 /* Animation des tags survolés */
