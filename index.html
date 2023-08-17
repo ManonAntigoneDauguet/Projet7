@@ -30,14 +30,14 @@
         <nav>
           <form method="get" action="" class="row d-flex justify-content-center align-items-center position-relative mt-2">
             <input type="text" name="search" id="search" class="col-9" placeholder="Rechercher une recette, un ingrédient, ...">
-            <div class="icon_container d-flex justify-content-end position-relative">
-              <img src="./images/icons/search_icon.svg" alt="lancer la recherche" height="52px" class="search_icon">
-              <img src="./images/icons/active_search_icon.svg" alt="lancer la recherche" height="52px" class="active_search_icon">
-              <input type="submit" value="" class="search_button position-absolute">
+            <div class="d-flex justify-content-end position-relative col-9">
+              <div class="icon_container d-flex justify-content-end col-9">
+                <img src="./images/icons/search_icon.svg" alt="lancer la recherche" height="52px" class="search_icon">
+                <img src="./images/icons/active_search_icon.svg" alt="lancer la recherche" height="52px" class="active_search_icon">                
+              </div>
+              <button type="submit" class="search_button position-absolute">Submit</button>
+              <button type="button" class="position-absolute close_button">Close</button>               
             </div>
-            <div class="close_container text-end d-none d-sm-block col-7 col-lg-8 position-relative">
-              <img src="./images/icons/close_icon.svg" height="13px" alt="supprimer">            
-            </div>            
           </form> 
         </nav>
       </div> 
@@ -62,7 +62,11 @@
               <div class="filter_options" role="listbox" id="listbox1">
                 <div>
                   <div class="pb-3">
-                    <input type="text" name="search1" id="search1" class="col-10 offset-1">
+                    <form method="get" action="" class="position-relative d-flex align-items-center">
+                      <input type="text" name="search1" id="search1" class="col-10 offset-1 border border-secondary-subtle border-2">
+                      <button type="submit" class="position-absolute filter_search_button">Search</button>
+                      <button type="button" class="position-absolute filter_close_button">Close</button>
+                    </form>  
                   </div>
                   <ul class="list-group list_options pt-1">
                   </ul>
@@ -80,7 +84,11 @@
               <div class="filter_options" role="listbox" id="listbox2">
                 <div>
                   <div class="pb-3">
-                    <input type="text" name="search2" id="search2" class="col-10 offset-1">
+                    <form method="get" action="" class="position-relative d-flex align-items-center">
+                      <input type="text" name="search2" id="search2" class="col-10 offset-1 border border-secondary-subtle border-2">
+                      <button type="submit" class="position-absolute filter_search_button">Search</button>
+                      <button type="button" class="position-absolute filter_close_button">Close</button>
+                    </form>  
                   </div>
                   <ul class="list-group list_options pt-1">
                   </ul>
@@ -98,7 +106,11 @@
               <div class="filter_options" role="listbox" id="listbox3">
                 <div>
                   <div class="pb-3">
-                    <input type="text" name="search3" id="search3" class="col-10 offset-1">
+                    <form method="get" action="" class="position-relative d-flex align-items-center">
+                      <input type="text" name="search3" id="search3" class="col-10 offset-1 border border-secondary-subtle border-2">
+                      <button type="submit" class="position-absolute filter_search_button">Search</button>
+                      <button type="button" class="position-absolute filter_close_button">Close</button>
+                    </form>  
                   </div>
                   <ul class="list-group list_options pt-1">
                   </ul>
