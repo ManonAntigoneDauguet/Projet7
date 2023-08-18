@@ -1,3 +1,6 @@
+@import url(./components/cards.css);
+@import url(./components/filters.css);
+
 :root {
     --primary-color: #FFD15B;
     --primary-family-font: 'Anton', sans-serif;
@@ -43,27 +46,59 @@ header .logo {
     text-align: center;
 }
 
-nav input[type="text"] {
+/* Affichage de la barre de recherche principale */
+#search {
     height: 72px;
     border-radius: 11px;
     padding: 30px;
     transform: scale(1);
 }
 
-nav img {
-    position: relative;
-    right: 12.6%;
-    bottom: 62px;
+nav .search_button {
+    height: 50px;
+    width: 50px;
+    border: none;
+    background: transparent;
+    text-indent: -999px;
+    overflow: hidden;
 }
 
-nav img:hover {
+nav .active_search_icon, nav .search_icon, nav .search_button {
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+}
+
+nav .active_search_icon {
+    opacity: 0;
+}
+
+nav .icon_container:hover .active_search_icon {
+    opacity: 1;
+}
+
+nav .icon_container {
+    z-index: 1;
+}
+
+nav .icon_container:active img[alt="lancer la recherche"] {
+    transform: scale(0.9);
+}
+
+nav .close_button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: transparent url(../images/icons/close_icon.svg) no-repeat center;
+    right: 60px;
+    bottom: 10px;
     cursor: pointer;
     opacity: 0.6;
-}
-
-nav img:active {
-    opacity: 0.6;
-    transform: scale(0.9);
+    text-indent: -999px;
+    overflow: hidden;
+    border: none;
+    /* display: none; */
 }
 
 
@@ -76,21 +111,7 @@ main .container {
     padding-bottom: 200px;
 }
 
-.total_recipes {
-    font-family: var(--primary-family-font);
-    font-size: 21px;
-    position: relative;
-    top: 15px;
-}
-
-
-/******************* FILTRES **********************/
-.filters_container {
-    gap: 5%;
-    row-gap: 24px;
-}
-
-.button {
+.tag {
     border: none;
     height: 56px;
     width: 195px;
@@ -104,98 +125,38 @@ main .container {
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
-}
-
-.options_selected_container .button:hover {
-    opacity: 0.6;
     cursor: pointer;
 }
 
-
-/******************* CARDS ***********************/
-.recipes_container {
-    gap: 0;
-    row-gap: 60px;
-}
-
-.card {
-    width: 380px;
-    height: 731px;
-    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
-    border-radius: 21px;
-    border: none;
-    position: relative;
-    transform: scale(1);
-    transition: all 300ms ease-in-out;
-}
-
-@media screen and (max-width: 992px) {
-    .card {
-        width: 100%;
-        height: min-content;
-    }
-}
-
-@media screen and (min-width: 992px) and (max-width: 1200px) {
-    .card {
-        width: 380px;
-        height: min-content;
-    }
-}
-
-@media screen and (min-width: 1200px) and (max-width: 1400px) {
-    .card {
-        width: 450px;
-        height: min-content;
-    }
-}
-
-.card .card-img-top {
-    height: 253px;
-    object-fit: cover;
-    border-top-left-radius: 21px;
-    border-top-right-radius: 21px;
-}
-
-.card .card-title {
+.total_recipes {
     font-family: var(--primary-family-font);
-    font-size: 18px;
+    font-size: 21px;
+    position: relative;
+    top: 15px;
 }
 
-.card .card-subtitle {
-    font-size: 12px;
-    letter-spacing: 1.5px;
+
+/******************* OPTIONS SELECTED **********************/
+.options_selected_container {
+    gap: 20px;
+    row-gap: 0px;
+}
+
+/* Animation des tags survolés */
+.options_selected_container .tag:hover span {
     font-weight: 700;
 }
 
-.card .card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 32px 25px;
-}
-
-.card .card-text {
-    font-size: 14px;
-}
-
-.card .recipe-time {
+.options_selected_container .active_close_icon {
     position: absolute;
-    background-color: var(--primary-color);
-    border-radius: 14px;
-    width: 63px;
-    height: 26px;
-    padding: 5px 15px;
-    top: 21px;
-    right: 25px;
-    font-size: 12px;
-    text-align: center;
+    right: 16px;
+    opacity: 0;
 }
 
-.card .ingredient {
-    font-weight: 500;
+.options_selected_container .tag:hover .active_close_icon {
+    opacity: 1;
 }
 
-.card:hover {
-    transform: scale(1.01);
+.options_selected_container .tag:hover .close_icon {
+    opacity: 0;
 }
