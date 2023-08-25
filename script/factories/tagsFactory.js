@@ -11,7 +11,7 @@ class Tag {
         selected.classList.add( 'bg-warning' );
         selected.classList.add( 'position-relative' );
         const content = `
-            <span>${this._option.innerText}</span>
+            <span class="option_selected">${this._option.innerText}</span>
             <img src="./images/icons/close_icon.svg" height="10px" alt="supprimer" class="close_icon">
             <img src="./images/icons/active_close_icon.svg" height="17px" alt="supprimer" class="active_close_icon">
         `

@@ -98,7 +98,7 @@ nav .close_button {
     text-indent: -999px;
     overflow: hidden;
     border: none;
-    /* display: none; */
+    display: none;
 }
 
 
