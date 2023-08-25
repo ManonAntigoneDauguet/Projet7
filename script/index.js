@@ -1,5 +1,5 @@
 // Import des fichiers nécessaires
-import firstUppercase from "./utils.js";
+import { transformIntoId } from "./utils.js";
 import Recipes from "./factories/recipesFactory.js";
 import Tag from "./factories/tagsFactory.js";
 import FilterComponent from "./factories/filtersFactory.js";
@@ -30,6 +30,69 @@ const appliancesOptionsContainer = document.querySelector( '#listbox2 .list_opti
 const ustensilsOptionsContainer = document.querySelector( '#listbox3 .list_options' );
 
 
+
+/**************** INITIALISATION DE LA PAGE ********************/
+let filteredRecipes = Array.from(recipes);
+
+
+// Création des objets filtres
+let filterComponent1 = new FilterComponent(1, "ingredients", searchFilter1, openButtonFilter1, ingredientsOptionsContainer);
+let filterComponent2 = new FilterComponent(2, "appliances", searchFilter2, openButtonFilter2, appliancesOptionsContainer);
+let filterComponent3 = new FilterComponent(3, "ustensils", searchFilter3, openButtonFilter3, ustensilsOptionsContainer);
+let filterComponents = [filterComponent1, filterComponent2, filterComponent3];
+
+
+function init() {
+    // Affichage dynamique des cartes recettes
+    displayRecipes(recipes);
+    
+    // Affichage dynamique des filtres
+    for (let i = 0; i < filterComponents.length; i++) {
+        displayOptionsAvailable(filterComponents[i], recipes);
+        filterComponents[i]._openButton.addEventListener("change", () => {
+            accessibilityFilterComponent(filterComponents[i]);
+        })
+
+        // Comportement des barres de recherche des filtres
+        const input = filterComponents[i]._searchInput;
+        input.addEventListener("input", () => {
+            openEraseButton(input, filterComponents[i]);
+            searchAFilterOption(filterComponents[i], input.value);
+        })
+        let form = forms[i+1];
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (filterComponents[i]._optionsContainer.firstChild) {
+                addTag(filterComponents[i]._optionsContainer.firstChild);
+                filterComponents[i]._openButton.checked = false;
+                filterRecipesWithTags();
+            }        
+        })
+    }
+
+    // Comportement de la barre de recherche principale
+    form0.addEventListener("submit", (event) => {
+        event.preventDefault();
+    }) 
+    searchMain.addEventListener("input", () => {
+        openEraseButton(searchMain);
+        if (searchMain.value.trim().length >= 3) {
+            filterRecipesWithSearch(searchMain.value.trim()); 
+        } else {
+            displayRecipes(filteredRecipes);
+            for (let i = 0; i < filterComponents.length; i++) {
+                displayOptionsAvailable(filterComponents[i], filteredRecipes)   
+            }
+        }
+    })
+}
+
+
+init();
+
+
+
+/******************* AFFICHAGE GENERAL **********************/
 // Création des cartes recettes (fonction)
 function displayRecipes(array) {
     recipesContainer.innerHTML = "";
@@ -42,12 +105,10 @@ function displayRecipes(array) {
     updateTotalRecipes(array);
 }
 
-
 // Mise à jour du nombre total de recette (fonction)
 function updateTotalRecipes(array) {
     document.querySelector( '.total_recipes' ).innerText = `${array.length} recettes`;
 }
-
 
 // Création des tags (fonction)
 function addTag(optionSelected) {
@@ -58,7 +119,6 @@ function addTag(optionSelected) {
         filterRecipesWithTags();
     })
 }
-
 
 // Création d'un message d'erreur s'il n'y aucune recette de disponible (fonction)
 function addErrorMessage(inputValue) {
@@ -79,41 +139,18 @@ function addErrorMessage(inputValue) {
 
 
 
-/**************** INITIALISATION DE LA PAGE ********************/
-// Affichage dynamique des cartes recettes
-displayRecipes(recipes);
-let filteredRecipes = Array.from(recipes);
-
-
-// Création des objets filtres
-let filterComponent1 = new FilterComponent(1, "ingredients", searchFilter1, openButtonFilter1, ingredientsOptionsContainer);
-let filterComponent2 = new FilterComponent(2, "appliances", searchFilter2, openButtonFilter2, appliancesOptionsContainer);
-let filterComponent3 = new FilterComponent(3, "ustensils", searchFilter3, openButtonFilter3, ustensilsOptionsContainer);
-let filterComponents = [filterComponent1, filterComponent2, filterComponent3];
-
-
-// Affichage dynamique des filtres
-for (let i = 0; i < filterComponents.length; i++) {
-    displayOptionsAvailable(filterComponents[i], recipes);
-}
-
-
-
 /******************* GESTION DES FILTRES **********************/
-// Comportement d'affichage des filtres
-for (let i = 0; i < filterComponents.length; i++) {
-    filterComponents[i]._openButton.addEventListener("change", () => {
-        if (filterComponents[i]._openButton.checked) {
-            document.querySelector( `label[for="${filterComponents[i]._openButton.id}"] .chevron`).setAttribute("alt", "refermer");
-        }        
-        else {
-            document.querySelector( `label[for="${filterComponents[i]._openButton.id}"] .chevron`).setAttribute("alt", "etendre");
-        }  
-    })
+// Ouverture et fermeture des filtres (fonction)
+function accessibilityFilterComponent(filterComponents) {
+    if (filterComponents._openButton.checked) {
+        document.querySelector( `label[for="${filterComponents._openButton.id}"] .chevron`).setAttribute("alt", "refermer");
+    }        
+    else {
+        document.querySelector( `label[for="${filterComponents._openButton.id}"] .chevron`).setAttribute("alt", "etendre");
+    }    
 }
 
-
-// Remplissage dynamique des filtres (fonctions)
+// Remplissage dynamique des filtres (fonction)
 function displayOptionsAvailable(filterComponentObject, array) {
     filterComponentObject._optionsContainer.innerHTML = "";
     const allOptions = filterComponentObject.getAllOptions(array);
@@ -132,42 +169,6 @@ function displayOptionsAvailable(filterComponentObject, array) {
 
 
 /*************** GESTION DES BARRES DE RECHERCHE ****************/
-// Gestion de la barre principale de recherche
-form0.addEventListener("submit", (event) => {
-    event.preventDefault();
-})  
-
-searchMain.addEventListener("keydown", () => { 
-    // appliquer à d'autres évennements, comme focus, onpaste...
-    if (searchMain.value.trim().length+1 >= 3) {
-        filterRecipesWithSearch(searchMain.value); // algorithme de recherche
-    }
-    openEraseButton(searchMain);
-});
-
-
-// Gestion des barres de recherches associées aux objects filtres
-for (let i = 0; i < filterComponents.length; i++) {
-    let input = filterComponents[i]._searchInput;
-    let form = forms[i+1];
-
-    input.addEventListener("keydown", () => {
-        console.log(input.value);
-        searchAFilterOption(filterComponents[i], input.value);
-        openEraseButton(input, filterComponents[i]);
-    })
-
-    form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        if (filterComponents[i]._optionsContainer.firstChild) {
-            console.log(filterComponents[i]._optionsContainer.firstChild)
-            addTag(filterComponents[i]._optionsContainer.firstChild);
-            filterComponents[i]._openButton.checked = false;
-            filterRecipesWithTags();
-        }        
-    })
-}
-
 // Ajout d'un bouton "effacer" (fonction)
 function openEraseButton(input, filterComponentObject = undefined) {
     const eraseButton = document.querySelector( `form[name="form_${input.id}"] .close_button`);
@@ -187,21 +188,25 @@ function openEraseButton(input, filterComponentObject = undefined) {
     })
 }
 
+// Gestion de la barre principale de recherche (fonction)
+function filterRecipesWithSearch(inputValue) {
+    let newFilteredRecipes = getFilteredRecipesWithSearch(inputValue);
+    displayRecipes(newFilteredRecipes);
+    for (let i = 0; i < filterComponents.length; i++) {
+        displayOptionsAvailable(filterComponents[i], newFilteredRecipes)  
+    }
+    if (newFilteredRecipes.length == 0) {
+        addErrorMessage(inputValue);
+    }  
+} 
 
-
-/*************** ALGORITHMES DE RECHERCHE ****************/
+// Gestion des barres de recherches associées aux objects filtres (fonction)
 function filterRecipesWithTags() {
-    // Filtre les recettes selon les tags sélectionnés
-    // Appelée lors de l'ajout ou de la suppression d'un tag
-    // S'il n'y aucune recette qui correspond, alors affichage du messsage d'erreur    
     filteredRecipes = Array.from(recipes);
     const allTags = document.querySelectorAll( '.option_selected');
-    for (let i = 0; i < allTags.length; i++) {
-        // console.log(allTags[i].innerText);
-    }
 
-    if (searchMain.value.trim().length+1 >= 3) {
-        filteredRecipes = getFilteredRecipesWithSearch(searchMain.value)
+    if (searchMain.value.trim().length >= 3) {
+        filteredRecipes = getFilteredRecipesWithSearch(searchMain.value.trim())
     }
     if (allTags.length != 0) {
         filteredRecipes = getFilteredRecipesWithTags(allTags);
@@ -217,24 +222,10 @@ function filterRecipesWithTags() {
 }
 
 
-function filterRecipesWithSearch(inputValue) {
-    // Filtre les recettes selon la recherche effectuée dans la barre principale
-    // Appelée par un event sur la barre principale
-    // S'il n'y aucune recette qui correspond, alors affichage du messsage d'erreur   
-    let newFilteredRecipes = getFilteredRecipesWithSearch(inputValue);
-    displayRecipes(newFilteredRecipes);
-    for (let i = 0; i < filterComponents.length; i++) {
-        displayOptionsAvailable(filterComponents[i], newFilteredRecipes)  
-    }
-    if (newFilteredRecipes.length == 0) {
-        addErrorMessage(inputValue);
-    }  
-}
 
-
+/*************** ALGORITHMES DE RECHERCHE ****************/
+// Filtre les options correspondants aux entrées utilisateur (fonction)
 function searchAFilterOption(filterComponentObject, inputValue) {
-    // Filtre les options qui correspondent aux entrées de l'utilisateur dans chaque filtre
-    // Appelée par un event sur la barre de recherche du filtre associé
     let optionsFiltered = [];
     let optionsAvailable = filterComponentObject.getAllOptions(filteredRecipes);
     
@@ -246,7 +237,8 @@ function searchAFilterOption(filterComponentObject, inputValue) {
     displayOptionsAvailable(filterComponentObject, optionsFiltered);
 }
 
-
+// Retourne la liste des recettes filtrées par la barre principale (fonction)
+// (prend en considération les tags présents)
 function getFilteredRecipesWithSearch(inputValue) {
     let newFilteredRecipes = filteredRecipes.filter((recipe) => {
         return (recipe.id < 30 && recipe.id > 10); // algorithme de recherche
@@ -254,10 +246,10 @@ function getFilteredRecipesWithSearch(inputValue) {
     return newFilteredRecipes;
 }
 
-
+// Retourne la liste des recettes filtrées par les tags sélectionnés (fonction)
 function getFilteredRecipesWithTags(allTags) {
     let newFilteredRecipes = filteredRecipes.filter((recipe) => {
-        return recipe.id <= 5; // algorithme de recherche
+        return recipe.id <= 20; // algorithme de recherche
     })
     return newFilteredRecipes;
 }

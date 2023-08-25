@@ -1,4 +1,4 @@
-import firstUppercase from "../utils.js";
+import { firstUppercase, transformIntoId } from "../utils.js";
 
 
 class FilterComponent {
@@ -24,6 +24,7 @@ class FilterComponent {
     getFilterOptionDOM(option) {
         const optionDOM = document.createElement( 'li' );
         optionDOM.classList.add( 'list-group-item' );
+        optionDOM.setAttribute("id", transformIntoId(option));
         optionDOM.innerText = option;
         return optionDOM;
     }
