@@ -1,4 +1,162 @@
+@import url(./components/cards.css);
+@import url(./components/filters.css);
+
+:root {
+    --primary-color: #FFD15B;
+    --primary-family-font: 'Anton', sans-serif;
+    --secondary-family-font: 'Manrope', sans-serif;
+}
+
 body {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
+    max-width: 1440px;
+    font-family: var(--secondary-family-font);
+}
+
+/******************* HEADER ***********************/
+header {
+    height: 667px;
+    box-sizing: border-box;
+    background-image: url("../images/main.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header::before {
+    content: "";
+    margin-top: 100px;
+}
+
+header .logo {
+    position: absolute;
+    top: 51px;
+    left: 69px;
+    width: 207px;
+}
+
+.main_tagline {
+    font-family: var(--primary-family-font);
+    color: var(--primary-color);
+    font-size: 44px;
+    text-align: center;
+}
+
+/* Affichage de la barre de recherche principale */
+#search {
+    height: 72px;
+    border-radius: 11px;
+    padding: 30px;
+    transform: scale(1);
+}
+
+nav .search_button {
+    height: 50px;
+    width: 50px;
+    border: none;
+    background: transparent;
+    text-indent: -999px;
+    overflow: hidden;
+}
+
+nav .active_search_icon, nav .search_icon, nav .search_button {
+    position: absolute;
+    bottom: 10px;
+    cursor: pointer;
+    transition: opacity 200ms ease-in-out;
+}
+
+nav .active_search_icon {
+    opacity: 0;
+}
+
+nav .icon_container:hover .active_search_icon {
+    opacity: 1;
+}
+
+nav .icon_container {
+    z-index: 1;
+}
+
+nav .icon_container:active img[alt="lancer la recherche"] {
+    transform: scale(0.9);
+}
+
+nav .close_button {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: transparent url(../images/icons/close_icon.svg) no-repeat center;
+    right: 60px;
+    bottom: 10px;
+    cursor: pointer;
+    opacity: 0.6;
+    text-indent: -999px;
+    overflow: hidden;
+    border: none;
+    display: none;
+}
+
+
+/******************* MAIN ***********************/
+main {
+    padding: 0 6%;
+}
+
+main .container {
+    padding-bottom: 200px;
+}
+
+.tag {
+    border: none;
+    height: 56px;
+    width: 195px;
+    border-radius: 11px;
+    box-sizing: border-box;
+    padding: 17px 16px;
+    background-color: white;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.total_recipes {
+    font-family: var(--primary-family-font);
+    font-size: 21px;
+    position: relative;
+    top: 15px;
+}
+
+
+/******************* OPTIONS SELECTED **********************/
+.options_selected_container {
+    gap: 20px;
+    row-gap: 0px;
+}
+
+/* Animation des tags survolés */
+.options_selected_container .tag:hover span {
+    font-weight: 700;
+}
+
+.options_selected_container .active_close_icon {
+    position: absolute;
+    right: 16px;
+    opacity: 0;
+}
+
+.options_selected_container .tag:hover .active_close_icon {
+    opacity: 1;
+}
+
+.options_selected_container .tag:hover .close_icon {
+    opacity: 0;
 }

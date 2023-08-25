@@ -1,0 +1,115 @@
+/******************* FILTERS **********************/
+.filters_container {
+    gap: 5%;
+    row-gap: 24px;
+}
+
+#search1, #search2, #search3 {
+    height: 36px;
+}
+
+.filter_search_button {
+    right: 8%;
+    text-indent: -999px;
+    overflow: hidden;
+    border: none;
+    width: 35px;
+    background: transparent url("../../images/icons/filter_search_icon.svg") no-repeat center;
+}
+
+.filter_options .close_button {
+    right: 18%;
+    text-indent: -999px;
+    overflow: hidden;
+    border: none;
+    width: 35px;
+    background: transparent url("../../images/icons/filter_close_icon.svg") no-repeat center;
+    display: none;
+}
+
+.filter_options {
+    padding-top: 56px;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+    transform: scaleY(0);
+    transition: 500ms ease-in-out;
+    transform-origin: top;
+    background-color: white;
+    width: 195px;
+    border-radius: 11px;
+}
+
+.filter_options .list_options::-webkit-scrollbar {
+    display: none;
+} 
+
+.filter_options .list_options {
+    border-radius: 11px;
+    max-height: 208px;
+    overflow: scroll;
+    scrollbar-width: none;    
+}
+
+.filter_options .list_options li {
+    cursor: pointer;  
+    border: none;  
+    font-size: 14px;
+    padding-top: 5.2px;
+    padding-bottom: 5.2px;
+    transition: background-color 200ms linear;
+}
+
+.filter_options .list_options li:hover {
+    background-color: var(--primary-color);
+}
+
+/* Fonctionnement d'ouverture et fermeture des filtres */
+.filter label div {
+    position: absolute;
+    z-index: 3;
+}
+
+.filter_options div {
+    opacity: 0;
+}
+
+.filter-checkbox {
+    position: absolute;
+    top: 17px;
+    right: 16px;
+    appearance: none;
+    z-index: 3;
+}
+
+.filter-checkbox:checked ~ .filter_options {
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    transform: scaleY(1);
+}
+
+.filter-checkbox:checked ~ .filter_options div {
+    transition: opacity .3s 100ms linear;
+    opacity: 1;
+}
+
+.filter-checkbox:checked + label .chevron {
+    transform: rotate(180deg);
+    transition: .1s ease-in-out;
+}
+
+.filter-checkbox:not(:checked) + label .chevron {
+    transition: .2s ease-in-out;
+}
+
+.filter-checkbox:not(:checked) ~ .filter_options div {
+    transition: opacity 200ms linear;
+}
+
+@media screen and (max-width: 992px) {
+    .filter-checkbox:checked ~ .filter_options {
+        z-index: 4;
+    } 
+    .filter-checkbox:checked + label div {
+        z-index: 5;
+    } 
+}

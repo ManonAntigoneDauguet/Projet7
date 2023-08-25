@@ -1,0 +1,95 @@
+/******************* CARDS ***********************/
+.recipes_container {
+    gap: 0;
+    row-gap: 60px;
+}
+
+.card {
+    width: 380px;
+    height: 731px;
+    box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+    border-radius: 21px;
+    border: none;
+    position: relative;
+    transform: scale(1);
+    transition: all 300ms ease-in-out;
+}
+
+@media screen and (max-width: 992px) {
+    .card {
+        width: 100%;
+        height: min-content;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    .card {
+        width: 380px;
+        height: min-content;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .card {
+        width: 450px;
+        height: min-content;
+    }
+}
+
+.card .card-img-top {
+    height: 253px;
+    object-fit: cover;
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.card .card-title {
+    font-family: var(--primary-family-font);
+    font-size: 18px;
+}
+
+.card .card-subtitle {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 32px 25px;
+}
+
+.card .card-text {
+    font-size: 14px;
+}
+
+.card .description {
+    height: 80px;
+    overflow: hidden;
+}
+
+.card .recipe-time {
+    position: absolute;
+    background-color: var(--primary-color);
+    border-radius: 14px;
+    width: 65px;
+    height: 26px;
+    padding: 5px 15px;
+    top: 21px;
+    right: 25px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.card .ingredient {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card:hover {
+    transform: scale(1.01);
+}
