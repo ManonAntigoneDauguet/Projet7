@@ -55,7 +55,6 @@ header .logo {
 }
 
 nav .search_button {
-    height: 50px;
     width: 50px;
     border: none;
     background: transparent;
@@ -68,6 +67,7 @@ nav .active_search_icon, nav .search_icon, nav .search_button {
     bottom: 10px;
     cursor: pointer;
     transition: opacity 200ms ease-in-out;
+    height: 52px;
 }
 
 nav .active_search_icon {

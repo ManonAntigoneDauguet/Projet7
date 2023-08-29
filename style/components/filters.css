@@ -65,7 +65,7 @@
 }
 
 /* Fonctionnement d'ouverture et fermeture des filtres */
-.filter label div {
+.filter label {
     position: absolute;
     z-index: 3;
 }
@@ -92,12 +92,12 @@
     opacity: 1;
 }
 
-.filter-checkbox:checked + label .chevron {
+.filter-checkbox:checked + div label .chevron {
     transform: rotate(180deg);
     transition: .1s ease-in-out;
 }
 
-.filter-checkbox:not(:checked) + label .chevron {
+.filter-checkbox:not(:checked) + div label .chevron {
     transition: .2s ease-in-out;
 }
 
@@ -109,7 +109,7 @@
     .filter-checkbox:checked ~ .filter_options {
         z-index: 4;
     } 
-    .filter-checkbox:checked + label div {
+    .filter-checkbox:checked + div label {
         z-index: 5;
     } 
 }
