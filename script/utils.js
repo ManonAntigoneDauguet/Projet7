@@ -5,6 +5,13 @@ function firstUppercase(string) {
     return newString;
 }
 
+function firstLowerCase(string) {
+    const firstLetter = string.charAt(0).toLowerCase();
+    const following = string.slice(1);
+    const newString = firstLetter + following;
+    return newString;
+}
+
 
 function transformIntoId(string) {
     let newString = string.toLowerCase();
@@ -20,4 +27,4 @@ function transformIntoId(string) {
 }
 
 
-export { firstUppercase, transformIntoId };
+export { firstUppercase, firstLowerCase, transformIntoId };

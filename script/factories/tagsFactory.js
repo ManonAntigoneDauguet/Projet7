@@ -1,6 +1,7 @@
 class Tag {
-    constructor(optionSelected) {
+    constructor(optionSelected, filterComponentObject) {
         this._option = optionSelected;
+        this._filter = filterComponentObject._subject;
     }
 
     getTagDOM() {
@@ -11,7 +12,7 @@ class Tag {
         selected.classList.add( 'bg-warning' );
         selected.classList.add( 'position-relative' );
         const content = `
-            <span class="option_selected">${this._option.innerText}</span>
+            <span class="option_selected" name="${this._filter}_tag">${this._option.innerText}</span>
             <img src="./images/icons/close_icon.svg" height="10px" alt="supprimer" class="close_icon">
             <img src="./images/icons/active_close_icon.svg" height="17px" alt="supprimer" class="active_close_icon">
         `

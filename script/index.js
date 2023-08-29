@@ -1,5 +1,5 @@
 // Import des fichiers nécessaires
-import { transformIntoId } from "./utils.js";
+import { transformIntoId, firstLowerCase } from "./utils.js";
 import Recipes from "./factories/recipesFactory.js";
 import Tag from "./factories/tagsFactory.js";
 import FilterComponent from "./factories/filtersFactory.js";
@@ -37,14 +37,14 @@ let filteredRecipes = Array.from(recipes);
 
 // Création des objets filtres
 let filterComponent1 = new FilterComponent(1, "ingredients", searchFilter1, openButtonFilter1, ingredientsOptionsContainer);
-let filterComponent2 = new FilterComponent(2, "appliances", searchFilter2, openButtonFilter2, appliancesOptionsContainer);
+let filterComponent2 = new FilterComponent(2, "appliance", searchFilter2, openButtonFilter2, appliancesOptionsContainer);
 let filterComponent3 = new FilterComponent(3, "ustensils", searchFilter3, openButtonFilter3, ustensilsOptionsContainer);
 let filterComponents = [filterComponent1, filterComponent2, filterComponent3];
 
 
 function init() {
     // Affichage dynamique des cartes recettes
-    displayRecipes(recipes);
+    displayRecipes(filteredRecipes);
     
     // Affichage dynamique des filtres
     for (let i = 0; i < filterComponents.length; i++) {
@@ -63,7 +63,7 @@ function init() {
         form.addEventListener("submit", (event) => {
             event.preventDefault();
             if (filterComponents[i]._optionsContainer.firstChild) {
-                addTag(filterComponents[i]._optionsContainer.firstChild);
+                addTag(filterComponents[i]._optionsContainer.firstChild, filterComponents[i]);
                 filterComponents[i]._openButton.checked = false;
                 filterRecipesWithTags();
             }        
@@ -97,7 +97,7 @@ init();
 function displayRecipes(array) {
     recipesContainer.innerHTML = "";
     for (let i = 0; i < array.length; i++) {
-        const recipe = new Recipes(recipes[i]);
+        const recipe = new Recipes(array[i]);
         const recipeCard = recipe.getCardDOM();
         recipesContainer.appendChild(recipeCard);
         recipe.getIngredientListDOM();
@@ -111,8 +111,8 @@ function updateTotalRecipes(array) {
 }
 
 // Création des tags (fonction)
-function addTag(optionSelected) {
-    const selected = new Tag(optionSelected).getTagDOM();        
+function addTag(optionSelected, filterComponentObject) {
+    const selected = new Tag(optionSelected, filterComponentObject).getTagDOM();      
     optionsSelectedContainer.appendChild(selected);
     selected.addEventListener("click", () => {
         optionsSelectedContainer.removeChild(selected);
@@ -126,15 +126,7 @@ function addErrorMessage(inputValue) {
     errorMessage.innerHTML = `Aucune recette ne contient <span class="detail_errorMessage"></span>,<br>Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
     recipesContainer.appendChild(errorMessage);
     const detail = document.querySelector( '.detail_errorMessage' ); 
-
-    if (inputValue instanceof NodeList) {
-        detail.innerText = `"${inputValue[0].innerText}"`;
-        for (let i = 1; i < inputValue.length; i++) {
-            detail.innerText = ` + "${inputValue[i].innerText}"`;
-        } 
-    } else { 
-        detail.innerText = `"${inputValue}"`;     
-    }
+    detail.innerText = `"${inputValue}"`;
 }
 
 
@@ -159,7 +151,7 @@ function displayOptionsAvailable(filterComponentObject, array) {
         const option = filterComponentObject.getFilterOptionDOM(allOptions[i]);
         filterComponentObject._optionsContainer.appendChild(option);
         option.addEventListener("click", () => {
-            addTag(option);
+            addTag(option, filterComponentObject);
             filterComponentObject._openButton.checked = false;
             filterRecipesWithTags();
         })
@@ -211,14 +203,10 @@ function filterRecipesWithTags() {
     if (allTags.length != 0) {
         filteredRecipes = getFilteredRecipesWithTags(allTags);
     } 
-
     displayRecipes(filteredRecipes);
     for (let i = 0; i < filterComponents.length; i++) {
         displayOptionsAvailable(filterComponents[i], filteredRecipes)   
-    }
-    if (filteredRecipes.length == 0) {
-        addErrorMessage(allTags);
-    }        
+    }      
 }
 
 
@@ -230,10 +218,12 @@ function searchAFilterOption(filterComponentObject, inputValue) {
     let optionsAvailable = filterComponentObject.getAllOptions(filteredRecipes);
     
     for (let i = 0; i < optionsAvailable.length; i++) {
-        if (optionsAvailable[i].includes((inputValue))) {
+        let optionsAvailableId = transformIntoId(optionsAvailable[i]);
+        if (optionsAvailableId.includes(transformIntoId(inputValue))) {
             optionsFiltered.push(optionsAvailable[i]);
         }
     }  
+    
     displayOptionsAvailable(filterComponentObject, optionsFiltered);
 }
 
@@ -248,8 +238,41 @@ function getFilteredRecipesWithSearch(inputValue) {
 
 // Retourne la liste des recettes filtrées par les tags sélectionnés (fonction)
 function getFilteredRecipesWithTags(allTags) {
-    let newFilteredRecipes = filteredRecipes.filter((recipe) => {
-        return recipe.id <= 20; // algorithme de recherche
-    })
+    let newFilteredRecipes = Array.from(filteredRecipes);
+
+    for (let i = 0; i < allTags.length; i++) {
+        let tag = allTags[i].innerText;
+        let finish;
+
+        switch (allTags[i].getAttribute( 'name' )) {
+            case "ingredients_tag":
+                finish = false;
+                while (!finish) {
+                    finish = true;
+                    for (let j = 0; j < newFilteredRecipes.length; j++) {
+                        let kept = false;
+                        let ingredientList = newFilteredRecipes[j].ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
+                        if (ingredientList.includes(transformIntoId(tag))) {
+                            kept = true;
+                        }
+                        if (!kept) {
+                            newFilteredRecipes.splice(j, 1);
+                            finish = false;
+                        }
+                    }                    
+                }
+                break
+            case "appliance_tag":
+                newFilteredRecipes = newFilteredRecipes.filter((recipe) => {
+                    return recipe.appliance == tag;
+                })  
+                break
+            case "ustensils_tag":
+                newFilteredRecipes = newFilteredRecipes.filter((recipe) => {
+                    return recipe.ustensils.includes(firstLowerCase(tag));
+                })  
+                break
+        }
+    }
     return newFilteredRecipes;
 }
