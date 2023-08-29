@@ -227,15 +227,6 @@ function searchAFilterOption(filterComponentObject, inputValue) {
     displayOptionsAvailable(filterComponentObject, optionsFiltered);
 }
 
-// Retourne la liste des recettes filtrées par la barre principale (fonction)
-// (prend en considération les tags présents)
-function getFilteredRecipesWithSearch(inputValue) {
-    let newFilteredRecipes = filteredRecipes.filter((recipe) => {
-        return (recipe.id < 30 && recipe.id > 10); // algorithme de recherche
-    })
-    return newFilteredRecipes;
-}
-
 // Retourne la liste des recettes filtrées par les tags sélectionnés (fonction)
 function getFilteredRecipesWithTags(allTags) {
     let newFilteredRecipes = Array.from(filteredRecipes);
@@ -275,4 +266,33 @@ function getFilteredRecipesWithTags(allTags) {
         }
     }
     return newFilteredRecipes;
+}
+
+// Retourne la liste des recettes filtrées par la barre principale (fonction)
+// (prend en considération les tags présents)
+
+/********** VERSION 2 ************/
+
+function getFilteredRecipesWithSearch(inputValue) {
+    console.time("timer");    
+    let newFilteredRecipes = [];
+    for (let i = 0; i < filteredRecipes.length; i++) {
+        let nameId = transformIntoId(filteredRecipes[i].name);
+        let ingredientList = filteredRecipes[i].ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
+        let description = transformIntoId(filteredRecipes[i].description);
+
+        if (nameId.includes(transformIntoId(inputValue))) {
+            newFilteredRecipes.push(filteredRecipes[i])
+        }
+        for (let j = 0; j < ingredientList.length; j++) {
+            if (ingredientList[j].includes(transformIntoId(inputValue))) {
+                newFilteredRecipes.push(filteredRecipes[i]);
+            }
+        }
+        if (description.includes(transformIntoId(inputValue))) {
+            newFilteredRecipes.push(filteredRecipes[i])
+        }
+    }
+    console.timeEnd("timer");
+    return [...new Set(newFilteredRecipes)];
 }
