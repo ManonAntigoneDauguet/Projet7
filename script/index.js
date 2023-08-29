@@ -126,15 +126,7 @@ function addErrorMessage(inputValue) {
     errorMessage.innerHTML = `Aucune recette ne contient <span class="detail_errorMessage"></span>,<br>Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
     recipesContainer.appendChild(errorMessage);
     const detail = document.querySelector( '.detail_errorMessage' ); 
-
-    if (inputValue instanceof NodeList) {
-        detail.innerText = `"${inputValue[0].innerText}"`;
-        for (let i = 1; i < inputValue.length; i++) {
-            detail.innerText = ` + "${inputValue[i].innerText}"`;
-        } 
-    } else { 
-        detail.innerText = `"${inputValue}"`;     
-    }
+    detail.innerText = `"${inputValue}"`;
 }
 
 
@@ -214,10 +206,7 @@ function filterRecipesWithTags() {
     displayRecipes(filteredRecipes);
     for (let i = 0; i < filterComponents.length; i++) {
         displayOptionsAvailable(filterComponents[i], filteredRecipes)   
-    }
-    if (filteredRecipes.length == 0) {
-        addErrorMessage(allTags);
-    }        
+    }      
 }
 
 
@@ -262,11 +251,10 @@ function getFilteredRecipesWithTags(allTags) {
                     finish = true;
                     for (let j = 0; j < newFilteredRecipes.length; j++) {
                         let kept = false;
-                        newFilteredRecipes[j].ingredients.forEach((ingredient) => {
-                            if (ingredient.ingredient == tag) {
-                                kept = true;
-                            } 
-                        }) 
+                        let ingredientList = newFilteredRecipes[j].ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
+                        if (ingredientList.includes(transformIntoId(tag))) {
+                            kept = true;
+                        }
                         if (!kept) {
                             newFilteredRecipes.splice(j, 1);
                             finish = false;
