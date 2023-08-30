@@ -297,5 +297,5 @@ function getFilteredRecipesWithSearch(inputValue) {
         return filteredRecipe;
     })
     console.timeEnd("timer");
-    return [...new Set(newFilteredRecipes)];
+    return newFilteredRecipes;
 }
