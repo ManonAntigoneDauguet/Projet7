@@ -272,26 +272,30 @@ function getFilteredRecipesWithTags(allTags) {
 // (prend en considération les tags présents)
 
 /********** VERSION 1 ************/
+
 function getFilteredRecipesWithSearch(inputValue) {
-    // console.time("timer");
-    let newFilteredRecipes = [];
-    filteredRecipes.forEach((recipe) => {
+    console.time("timer");
+    let newFilteredRecipes = Array.from(filteredRecipes);
+    newFilteredRecipes = newFilteredRecipes.filter((recipe) => {
         let nameId = transformIntoId(recipe.name);
         let ingredientList = recipe.ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
         let description = transformIntoId(recipe.description);
+        let filteredRecipe;
+        let ingredientIncluded = false;
 
-        if (nameId.includes(transformIntoId(inputValue))) {
-            newFilteredRecipes.push(recipe);
-        }    
         ingredientList.forEach((ingredient) => {
             if (ingredient.includes(transformIntoId(inputValue))) {
-                newFilteredRecipes.push(recipe);
+                ingredientIncluded = true;
             }
         })
-        if (description.includes(transformIntoId(inputValue))) {
-            newFilteredRecipes.push(recipe);
-        } 
+
+        if (description.includes(transformIntoId(inputValue))
+            || nameId.includes(transformIntoId(inputValue))
+            || ingredientIncluded) {
+            filteredRecipe = recipe;
+        }
+        return filteredRecipe;
     })
-    // console.timeEnd("timer");
+    console.timeEnd("timer");
     return [...new Set(newFilteredRecipes)];
 }
