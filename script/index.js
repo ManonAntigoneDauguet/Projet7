@@ -275,8 +275,7 @@ function getFilteredRecipesWithTags(allTags) {
 
 function getFilteredRecipesWithSearch(inputValue) {
     console.time("timer");
-    let newFilteredRecipes = Array.from(filteredRecipes);
-    newFilteredRecipes = newFilteredRecipes.filter((recipe) => {
+    let newFilteredRecipes = filteredRecipes.filter((recipe) => {
         let nameId = transformIntoId(recipe.name);
         let ingredientList = recipe.ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
         let description = transformIntoId(recipe.description);
