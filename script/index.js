@@ -182,10 +182,12 @@ function openEraseButton(input, filterComponentObject = undefined) {
 
 // Gestion de la barre principale de recherche (fonction)
 function filterRecipesWithSearch(inputValue) {
+    // console.time("timer");
     let newFilteredRecipes = getFilteredRecipesWithSearch(inputValue);
+    // console.timeEnd("timer");
     displayRecipes(newFilteredRecipes);
     for (let i = 0; i < filterComponents.length; i++) {
-        displayOptionsAvailable(filterComponents[i], newFilteredRecipes)  
+        displayOptionsAvailable(filterComponents[i], newFilteredRecipes);  
     }
     if (newFilteredRecipes.length == 0) {
         addErrorMessage(inputValue);
@@ -272,29 +274,22 @@ function getFilteredRecipesWithTags(allTags) {
 // (prend en considération les tags présents)
 
 /********** VERSION 1 ************/
-
+// console.log("version 1 méthodes objet");
 function getFilteredRecipesWithSearch(inputValue) {
-    console.time("timer");
-    let newFilteredRecipes = filteredRecipes.filter((recipe) => {
-        let nameId = transformIntoId(recipe.name);
-        let ingredientList = recipe.ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
-        let description = transformIntoId(recipe.description);
-        let filteredRecipe;
-        let ingredientIncluded = false;
+    return filteredRecipes.filter((recipe) => {
 
+        let nameId = transformIntoId(recipe.name);
+        let description = transformIntoId(recipe.description);
+        if (description.includes(transformIntoId(inputValue)) || nameId.includes(transformIntoId(inputValue))) {
+            return recipe;
+        }
+        
+        let ingredientList = recipe.ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
         ingredientList.forEach((ingredient) => {
             if (ingredient.includes(transformIntoId(inputValue))) {
-                ingredientIncluded = true;
+                return recipe;
             }
-        })
-
-        if (description.includes(transformIntoId(inputValue))
-            || nameId.includes(transformIntoId(inputValue))
-            || ingredientIncluded) {
-            filteredRecipe = recipe;
-        }
-        return filteredRecipe;
+        });
+        return null;
     })
-    console.timeEnd("timer");
-    return newFilteredRecipes;
 }
