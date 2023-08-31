@@ -182,7 +182,9 @@ function openEraseButton(input, filterComponentObject = undefined) {
 
 // Gestion de la barre principale de recherche (fonction)
 function filterRecipesWithSearch(inputValue) {
+    // console.time("timer");  
     let newFilteredRecipes = getFilteredRecipesWithSearch(inputValue);
+    // console.timeEnd("timer");
     displayRecipes(newFilteredRecipes);
     for (let i = 0; i < filterComponents.length; i++) {
         displayOptionsAvailable(filterComponents[i], newFilteredRecipes)  
@@ -272,9 +274,9 @@ function getFilteredRecipesWithTags(allTags) {
 // (prend en considération les tags présents)
 
 /********** VERSION 2 ************/
-
+// console.log("version 2 boucles natives");
 function getFilteredRecipesWithSearch(inputValue) {
-    console.time("timer");    
+  
     let newFilteredRecipes = [];
     for (let i = 0; i < filteredRecipes.length; i++) {
         let nameId = transformIntoId(filteredRecipes[i].name);
@@ -293,6 +295,6 @@ function getFilteredRecipesWithSearch(inputValue) {
             newFilteredRecipes.push(filteredRecipes[i])
         }
     }
-    console.timeEnd("timer");
+
     return [...new Set(newFilteredRecipes)];
 }
