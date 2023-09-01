@@ -285,11 +285,8 @@ function getFilteredRecipesWithSearch(inputValue) {
         }
         
         let ingredientList = recipe.ingredients.map(ingredient => transformIntoId(ingredient.ingredient));
-        ingredientList.forEach((ingredient) => {
-            if (ingredient.includes(transformIntoId(inputValue))) {
-                return recipe;
-            }
-        });
-        return null;
+        if (ingredientList.some(ingredient => ingredient.includes(transformIntoId(inputValue)))) {
+            return recipe;
+        }
     })
 }
